@@ -30,7 +30,6 @@ class ParticipantController extends AbstractController
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $participant = $form->getData();
-
             $participant->setEvent($event);
 
             $this->entityManager->persist($participant);
