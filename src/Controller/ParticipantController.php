@@ -32,6 +32,22 @@ class ParticipantController extends AbstractController
             $participant = $form->getData();
             $participant->setEvent($event);
 
+            if ($event->getDate() < new \DateTime('now')) {
+                $error = "Cet événement est déjà passé, vous ne pouvez plus vous inscrire";
+
+                $this->addFlash('error', $error);
+                return $this->redirectToRoute('app_add_participant', ['eventId' => $event->getId()]);
+            }
+
+            foreach ($participant->getEvent()->getParticipants() as $participant) {
+                if ($participant->getEmail() === $participant->getEmail()) {
+                    $error = "Cette adresse mail a déjà été utilisée pour cette événement";
+
+                    $this->addFlash('error', $error);
+                    return $this->redirectToRoute('app_add_participant', ['eventId' => $event->getId()]);
+                }
+            }
+
             $this->entityManager->persist($participant);
             $this->entityManager->flush();
             return $this->redirectToRoute('app_event_show', ['id' => $eventId]);
