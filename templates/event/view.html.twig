@@ -19,6 +19,26 @@
             </ul>
             <a href="{{ path('app_add_participant', {'eventId': event.id}) }}" class="btn btn-primary mt-2">Ajouter un participant</a>
             <a href="{{ path('app_event') }}" class="btn btn-secondary mt-2">Retour</a>
+
+            <hr>
+
+            <p>Distance entre ma position actuelle et l'événement:</p>
+            <button onclick="getLocation()" class="btn btn-primary">Calculer</button>
         </div>
     </div>
+
+    <script>
+        function getLocation() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(showPosition);
+            }
+        }
+
+        function showPosition(position) {
+            const userLat = position.coords.latitude;
+            const userLon = position.coords.longitude;
+
+            window.location.href = `/events/{{ event.id }}/distance?lat=${userLat}&lon=${userLon}`;
+        }
+    </script>
 {% endblock %}
