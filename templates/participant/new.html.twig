@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello ParticipantController!{% endblock %}
+
+{% block body %}
+    <div class="row">
+        <div class="col-2"></div>
+        <div class="col-8">
+            <a href="{{ path('app_event_show', {'id': event.id}) }}" class="btn btn-secondary mt-5">Retour</a>
+            <h1 class="mt-2">Ajouter un participant à {{ event.name }}</h1>
+            <hr>
+            {{ form(form) }}
+        </div>
+    </div>
+
+{% endblock %}

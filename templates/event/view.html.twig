@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ event.name }}{% endblock %}
+
+{% block body %}
+    <div class="row mt-5">
+        <div class="col-2"></div>
+        <div class="col-8">
+            <h1>{{ event.name }}</h1>
+            <hr>
+            <p>{{ event.date | date () }}</p>
+            <p>{{ event.location }}</p>
+            <hr>
+            <h2>Participants :</h2>
+            <ul>
+                {% for participant in event.participants %}
+                    <li class="mt-2">{{ participant.name }}</li>
+                {% endfor %}
+            </ul>
+            <a href="{{ path('app_add_participant', {'eventId': event.id}) }}" class="btn btn-primary mt-2">Ajouter un participant</a>
+            <a href="{{ path('app_event') }}" class="btn btn-secondary mt-2">Retour</a>
+        </div>
+    </div>
+{% endblock %}

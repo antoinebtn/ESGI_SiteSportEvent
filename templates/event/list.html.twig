@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello EventController!{% endblock %}
+
+{% block body %}
+
+    <div class="row mt-4">
+        <div class="col-2">
+
+        </div>
+        <div class="col-8">
+            <h1>Liste des événements</h1>
+
+            <table class="table">
+                <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Nom</th>
+                    <th scope="col">Date</th>
+                    <th scope="col">Lien</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for event in events%}
+                    <tr>
+                        <th scope="row">{{ event.id }}</th>
+                        <td><a href="{{ path('app_event_show', {'id': event.id}) }}">{{ event.name }}</a></td>
+                        <td>{{ event.date | date() }}</td>
+                        <td>{{ event.location }}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}
