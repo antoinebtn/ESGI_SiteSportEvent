@@ -18,7 +18,7 @@ class EventController extends AbstractController
     ) {
     }
 
-    #[Route('/event', name: 'app_event', methods: ['GET'])]
+    #[Route('/', name: 'app_event', methods: ['GET'])]
     public function listEvents(): Response
     {
         $events = $this->entityManager->getRepository(Event::class)->findAll();
